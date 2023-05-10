@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/AbdulrahmanDaud10/slade360-customer-order-service/pkg/app"
+	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
 
@@ -20,6 +22,8 @@ func main() {
 	}
 }
 func Run() error {
+	server := app.NewServer(mux.NewRouter())
+
 	// start server
 	if err := server.Run(); err != nil {
 		return err
