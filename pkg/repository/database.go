@@ -12,7 +12,7 @@ var (
 	err error
 )
 
-// // SetupDB opens a database and saves the reference to `Database` struct.
+// SetUpDatabaseConnection opens a database and saves the reference to `Database` struct.
 func SetUpDatabaseConnection() (*gorm.DB, error) {
 	var db *gorm.DB
 
