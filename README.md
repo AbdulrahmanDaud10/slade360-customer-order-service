@@ -31,7 +31,7 @@ They were particularly interested in:
 - [x] Add REST API to input/upload customers and orders:
     - [x] Customers should have details e.g. names and code.
     - [x] Orders have simple details e.g. amount and time
-- [ ] Impliment authentication and authorization via JWT
+- [x] Impliment authentication and authorization via JWT
 - [ ] When an order is added, send the customer an SMS alterting them (You can use the Africa's talking SMS gateway and sandbox)
 - [ ] Write unit test (with coverage checking) and set up CI + automated CD. You can deploy to any PAAS/FAAS/IAAS of your choice.
 - [x] Write a README for the project and host it on your GitHub.
