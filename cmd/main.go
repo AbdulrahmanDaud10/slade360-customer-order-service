@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/AbdulrahmanDaud10/slade360-customer-order-service/pkg/api"
 	"github.com/AbdulrahmanDaud10/slade360-customer-order-service/pkg/app"
+	"github.com/AbdulrahmanDaud10/slade360-customer-order-service/pkg/repository"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
@@ -22,7 +24,15 @@ func main() {
 	}
 }
 func Run() error {
-	server := app.NewServer(mux.NewRouter())
+	db, err := repository.SetUpDatabaseConnection()
+	if err != nil {
+		return err
+	}
+
+	storage := repository.NewStorage(db)
+	customerService := api.NewCustomerService(storage)
+
+	server := app.NewServer(mux.NewRouter(), customerService)
 
 	// start server
 	if err := server.Run(); err != nil {
