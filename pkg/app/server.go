@@ -6,16 +6,19 @@ import (
 	"os"
 	"time"
 
+	"github.com/AbdulrahmanDaud10/slade360-customer-order-service/pkg/api"
 	"github.com/gorilla/mux"
 )
 
 type server struct {
-	router *mux.Router
+	router          *mux.Router
+	customerservice api.CustomerService
 }
 
-func NewServer(router *mux.Router) *server {
+func NewServer(router *mux.Router, customerservice api.CustomerService) *server {
 	return &server{
-		router: router,
+		router:          router,
+		customerservice: customerservice,
 	}
 }
 
