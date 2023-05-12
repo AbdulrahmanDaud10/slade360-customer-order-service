@@ -10,11 +10,11 @@ type Model struct {
 
 type Customer struct {
 	Model
-	customerID  string `gorm:"column:customer_id;" json:"customer_id"`
-	order       string `gorm:"column:order;" json:"order"`
-	userName    string `gorm:"column:user_name;" json:"user_name"`
-	code        string `gorm:"column:code;" json:"code"`
-	email       string `gorm:"column:email;" json:"email"`
-	password    string `gorm:"column:password;" json:"password"`
-	phoneNumber string `gorm:"column:phone_number;" json:"phone_number"`
+	CustomerID  string `gorm:"column:customer_id;" json:"customer_id"`
+	Order       string `gorm:"column:order;" json:"order"`
+	UserName    string `gorm:"column:user_name;" json:"user_name"`
+	Code        string `gorm:"column:code;" json:"code"`
+	Email       string `gorm:"column:email;" json:"email"`
+	Password    string `gorm:"column:password;" json:"password"`
+	PhoneNumber string `gorm:"column:phone_number;" json:"phone_number"`
 }

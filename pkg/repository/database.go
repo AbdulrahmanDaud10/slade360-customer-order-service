@@ -2,8 +2,10 @@ package repository
 
 import (
 	"fmt"
+	"log"
 	"os"
 
+	"github.com/AbdulrahmanDaud10/slade360-customer-order-service/pkg/api"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -36,11 +38,13 @@ func SetUpDatabaseConnection() (*gorm.DB, error) {
 		fmt.Println("db err: ", err)
 		return nil, err
 	}
-	// TODO: run the customer migration after implemented
-	// db.AutoMigrate(api.customer{})
-	// if err != nil {
-	// 	log.Fatal("Error connecting to the database...", err)
-	// }
+	// Run the customer migration after implemented
+	db.AutoMigrate(api.Customer{
+		Model: api.Model{},
+	})
+	if err != nil {
+		log.Fatal("Error connecting to the database...", err)
+	}
 
 	fmt.Println("Database connection successful...")
 
