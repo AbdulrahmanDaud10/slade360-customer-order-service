@@ -41,10 +41,7 @@ func (c *customerService) AddOrder(customerID string, request orderCustomerReque
 		Model:       Model{},
 		CustomerID:  customerID,
 		Order:       "",
-		UserName:    "",
 		Code:        "",
-		Email:       "",
-		Password:    "",
 		PhoneNumber: "",
 	}
 

@@ -30,7 +30,7 @@ func handleGoogleLogin(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleGoogleCallback(w http.ResponseWriter, r *http.Request) {
-	content, err := getUserInfo(r.FormValue("state"), r.FormValue("code"))
+	content, err := getCustomerInfo(r.FormValue("state"), r.FormValue("code"))
 	if err != nil {
 		fmt.Println(err.Error())
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
@@ -40,7 +40,7 @@ func handleGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Content: %s\n", content)
 }
 
-func getUserInfo(state string, code string) ([]byte, error) {
+func getCustomerInfo(state string, code string) ([]byte, error) {
 	if state != oauthStateString {
 		return nil, fmt.Errorf("invalid oauth state")
 	}
