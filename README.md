@@ -61,10 +61,10 @@ The .env file should look like this:
 
 ```
 # database configurations
-DB_HOST = "localhost"
+DB_HOST = "127.0.0.1"
 DB_PORT = "5432"
 DB_USER = "postgres"
-DB_NAME = " "
+DB_NAME = "customer_order"
 DB_PASSWORD = ""
 
 # port for app to listen and serve

@@ -18,19 +18,21 @@ var (
 func SetUpDatabaseConnection() (*gorm.DB, error) {
 	var db *gorm.DB
 
-	driver := os.Getenv("DB_DRIVER")
-	database := os.Getenv("DB_NAME")
-	username := os.Getenv("DB_USER")
-	password := os.Getenv("DB_PASSWORD")
-	host := os.Getenv("DB_HOST")
-	port := os.Getenv("DB_PORT")
-	dsn := fmt.Sprintf("driver=%s database=%s username=%s host=%s password=%s port=%s sslmode=disable",
-		driver,
-		database,
-		username,
+	var (
+		host     = os.Getenv("DB_HOST")
+		port     = os.Getenv("DB_PORT")
+		driver   = os.Getenv("DB_DRIVER")
+		username = os.Getenv("DB_USER")
+		database = os.Getenv("DB_NAME")
+		password = os.Getenv("DB_PASSWORD")
+	)
+	dsn := fmt.Sprintf("host=%s port=%s driver=%s username=%s database=%s  password=%s sslmode=disable",
 		host,
-		password,
 		port,
+		driver,
+		username,
+		database,
+		password,
 	)
 
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
