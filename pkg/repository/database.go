@@ -21,15 +21,13 @@ func SetUpDatabaseConnection() (*gorm.DB, error) {
 	var (
 		host     = os.Getenv("DB_HOST")
 		port     = os.Getenv("DB_PORT")
-		driver   = os.Getenv("DB_DRIVER")
 		username = os.Getenv("DB_USER")
 		database = os.Getenv("DB_NAME")
 		password = os.Getenv("DB_PASSWORD")
 	)
-	dsn := fmt.Sprintf("host=%s port=%s driver=%s username=%s database=%s  password=%s sslmode=disable",
+	dsn := fmt.Sprintf("host=%s port=%s user=%s database=%s  password=%s sslmode=disable",
 		host,
 		port,
-		driver,
 		username,
 		database,
 		password,
