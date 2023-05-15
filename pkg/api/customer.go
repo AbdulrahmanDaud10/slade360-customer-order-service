@@ -9,13 +9,15 @@ import (
 )
 
 type orderCustomerRequest struct {
-	item       string    `josn:"item"`
-	amount     string    `json:"amount"`
-	time       time.Time `json:"time"`
-	customerID string    `json:"customer_id"`
+	Item       string    `josn:"item"`
+	Amount     string    `json:"amount"`
+	Time       time.Time `json:"time"`
+	CustomerID string    `json:"customer_id"`
 }
 
 type CustomerService interface {
+	AddOrder(customerID string, request orderCustomerRequest) error
+	validateAmount(amount string) error
 }
 
 type customerRepository interface {
@@ -31,19 +33,16 @@ func NewCustomerService(customerRepo customerRepository) CustomerService {
 }
 
 func (c *customerService) AddOrder(customerID string, request orderCustomerRequest) error {
-	if err := c.validateAmount(request.amount); err != nil {
+	if err := c.validateAmount(request.Amount); err != nil {
 		return err
 	}
 
 	newOrder := Customer{
 		Model:       Model{},
-		customerID:  customerID,
-		order:       "",
-		userName:    "",
-		code:        "",
-		email:       "",
-		password:    "",
-		phoneNumber: "",
+		CustomerID:  customerID,
+		Order:       "",
+		Code:        "",
+		PhoneNumber: "",
 	}
 
 	if err := c.storage.CreateOrder(newOrder); err != nil {

@@ -2,8 +2,10 @@ package repository
 
 import (
 	"fmt"
+	"log"
 	"os"
 
+	"github.com/AbdulrahmanDaud10/slade360-customer-order-service/pkg/api"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -16,19 +18,19 @@ var (
 func SetUpDatabaseConnection() (*gorm.DB, error) {
 	var db *gorm.DB
 
-	driver := os.Getenv("DB_DRIVER")
-	database := os.Getenv("DB_NAME")
-	username := os.Getenv("DB_USER")
-	password := os.Getenv("DB_PASSWORD")
-	host := os.Getenv("DB_HOST")
-	port := os.Getenv("DB_PORT")
-	dsn := fmt.Sprintf("driver=%s database=%s username=%s host=%s password=%s port=%s sslmode=disable",
-		driver,
-		database,
-		username,
+	var (
+		host     = os.Getenv("DB_HOST")
+		port     = os.Getenv("DB_PORT")
+		username = os.Getenv("DB_USER")
+		database = os.Getenv("DB_NAME")
+		password = os.Getenv("DB_PASSWORD")
+	)
+	dsn := fmt.Sprintf("host=%s port=%s user=%s database=%s  password=%s sslmode=disable",
 		host,
-		password,
 		port,
+		username,
+		database,
+		password,
 	)
 
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -36,11 +38,13 @@ func SetUpDatabaseConnection() (*gorm.DB, error) {
 		fmt.Println("db err: ", err)
 		return nil, err
 	}
-	// TODO: run the customer migration after implemented
-	// db.AutoMigrate(api.customer{})
-	// if err != nil {
-	// 	log.Fatal("Error connecting to the database...", err)
-	// }
+	// Run the customer migration after implemented
+	db.AutoMigrate(api.Customer{
+		Model: api.Model{},
+	})
+	if err != nil {
+		log.Fatal("Error connecting to the database...", err)
+	}
 
 	fmt.Println("Database connection successful...")
 
