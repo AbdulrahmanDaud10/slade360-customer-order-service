@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/AbdulrahmanDaud10/slade360-customer-order-service/pkg/api"
@@ -38,6 +39,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "this is a startup error: %s\n", err)
 		os.Exit(1)
 	}
+	http.ListenAndServe(":8080", nil)
 }
 func Run() error {
 	db, err := repository.SetUpDatabaseConnection()
