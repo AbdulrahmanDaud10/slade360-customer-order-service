@@ -33,7 +33,7 @@ They were particularly interested in:
     - [x] Orders have simple details e.g. amount and time
 - [x] Impliment authentication and authorization via JWT
 - [ ] When an order is added, send the customer an SMS alterting them (You can use the Africa's talking SMS gateway and sandbox)
-- [ ] Write unit test (with coverage checking) and set up CI + automated CD. You can deploy to any PAAS/FAAS/IAAS of your choice.
+- [x] Write unit test (with coverage checking) and set up CI + automated CD. You can deploy to any PAAS/FAAS/IAAS of your choice.
 - [x] Write a README for the project and host it on your GitHub.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
