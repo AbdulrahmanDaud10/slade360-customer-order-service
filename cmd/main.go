@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
 	"os"
 
 	"github.com/AbdulrahmanDaud10/slade360-customer-order-service/pkg/api"
@@ -9,36 +11,8 @@ import (
 	"github.com/AbdulrahmanDaud10/slade360-customer-order-service/pkg/repository"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
-	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/google"
 )
 
-var (
-	googleOauthConfig *oauth2.Config
-)
-
-func Googleinit() {
-	googleOauthConfig = &oauth2.Config{
-		RedirectURL:  "http://localhost:8080/callback",
-		ClientID:     os.Getenv("GOOGLE_CLIENT_ID"),
-		ClientSecret: os.Getenv("GOOGLE_CLIENT_SECRET"),
-		Scopes:       []string{"https://www.googleapis.com/auth/userinfo.email"},
-		Endpoint:     google.Endpoint,
-	}
-}
-
-func init() {
-	if err := godotenv.Load("../.env"); err != nil {
-		panic(err)
-	}
-}
-
-func main() {
-	if err := Run(); err != nil {
-		fmt.Fprintf(os.Stderr, "this is a startup error: %s\n", err)
-		os.Exit(1)
-	}
-}
 func Run() error {
 	db, err := repository.SetUpDatabaseConnection()
 	if err != nil {
@@ -55,4 +29,27 @@ func Run() error {
 		return err
 	}
 	return nil
+}
+
+func main() {
+	if err := godotenv.Load("../.env"); err != nil {
+		log.Fatalf("Failed to load the env vars: %v", err)
+	}
+
+	if err := Run(); err != nil {
+		fmt.Fprintf(os.Stderr, "this is a startup error: %s\n", err)
+		os.Exit(1)
+	}
+
+	auth, err := api.New()
+	if err != nil {
+		log.Fatalf("Failed to initialize the authenticator: %v", err)
+	}
+
+	rtr := app.New(auth)
+
+	log.Print("Server listening on http://localhost:3000/")
+	if err := http.ListenAndServe("127.0.0.1:3000", rtr); err != nil {
+		log.Fatalf("There was an error with the http server: %v", err)
+	}
 }
