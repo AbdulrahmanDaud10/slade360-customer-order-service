@@ -69,7 +69,20 @@ DB_PASSWORD = ""
 
 # port for app to listen and serve
 LISTEN_ADDRESS = "127.0.0.1"
-LISTEN_PORT = "8080"
+LISTEN_PORT = "3000"
+
+# The URL of our Auth0 Tenant Domain.
+# If you're using a Custom Domain, be sure to set this to that value instead.
+AUTH0_DOMAIN = ' '
+
+# Our Auth0 application's Client ID.
+AUTH0_CLIENT_ID = ' '
+
+# Our Auth0 application's Client Secret.
+AUTH0_CLIENT_SECRET = ' '
+
+# The Callback URL of our application.
+AUTH0_CALLBACK_URL = ' '
 
 ```
 You can change the values to your own preference.
