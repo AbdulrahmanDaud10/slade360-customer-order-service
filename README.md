@@ -60,16 +60,22 @@ Copy the content on .env_example to .env file
 The .env file should look like this:
 
 ```
-# database configurations
+# Database Configurations
 DB_HOST = "127.0.0.1"
 DB_PORT = "5432"
 DB_USER = "postgres"
 DB_NAME = "customer_order"
 DB_PASSWORD = ""
 
-# port for app to listen and serve
+# Port for Application to listen and Server
 LISTEN_ADDRESS = "127.0.0.1"
 LISTEN_PORT = "3000"
+
+# Africa's Talking Bulk SMS Configurations
+BASE_LIVE_ENDPOINT    = " "
+BASE_SANDBOX_ENDPOINT = " "
+API_KEY               = " "
+USERNAME              = " "
 
 # The URL of our Auth0 Tenant Domain.
 # If you're using a Custom Domain, be sure to set this to that value instead.
